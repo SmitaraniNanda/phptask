@@ -81,6 +81,9 @@
         },
         "/api/upload": {
             "post": {
+                "tags": [
+                    "File Upload"
+                ],
                 "summary": "Upload a file",
                 "operationId": "236646dc9bd2c1562b7e89e0f851c093",
                 "requestBody": {
@@ -93,7 +96,8 @@
                                 ],
                                 "properties": {
                                     "file": {
-                                        "type": "file"
+                                        "type": "string",
+                                        "format": "binary"
                                     }
                                 },
                                 "type": "object"
@@ -103,9 +107,32 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Upload successful"
+                        "description": "Upload successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "file_path": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/sample": {
@@ -141,6 +168,10 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "File Upload",
+            "description": "File Upload"
         },
         {
             "name": "Sample",

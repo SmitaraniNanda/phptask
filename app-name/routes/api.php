@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FileUploadController;
-use App\Http\Controllers\SwaggerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +21,8 @@ use App\Http\Controllers\SwaggerController;
 // Route::get('/welcome', [AuthController::class, 'welcome']);
 
 
-
-// Public login route
 Route::post('/login', [AuthController::class, 'login']);
-
-// Protected route for file upload (requires auth)
-Route::middleware('auth:sanctum')->post('/upload', [FileUploadController::class, 'upload']);
-
-// Sample public route
-Route::get('/sample', [SwaggerController::class, 'sample']);
-
-// Optionally add Swagger documentation route (optional if already handled via config)
-// Route::get('/documentation', function () {
-//     return view('vendor.l5-swagger.index');
-// });
-
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::post('/upload', [FileUploadController::class, 'upload'])->middleware('auth:sanctum');

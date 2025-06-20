@@ -1,57 +1,28 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-/**
- * @OA\Post(
- *     path="/api/upload",
- *     summary="Upload a file",
- *     tags={"File Upload"},
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\MediaType(
- *             mediaType="multipart/form-data",
- *             @OA\Schema(
- *                 required={"file"},
- *                 @OA\Property(
- *                     property="file",
- *                     type="string",
- *                     format="binary"
- *                 )
- *             )
- *         )
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Upload successful",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string"),
- *             @OA\Property(property="file_path", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=422,
- *         description="Validation error"
- *     )
- * )
- */
 class FileUploadController extends Controller
 {
     public function upload(Request $request)
     {
+        // Validate the request
         $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,pdf,docx|max:2048',
+            'file' => 'required|file|max:2048', //  Limit size to 2MB
         ]);
 
-        // Store in storage/app/public/uploads
-        $path = $request->file('file')->store('uploads', 'public');
+        // Store the file inside storage/app/public/uploads
+        $path = $request->file('file')->store('public/uploads');
+
+        // Get public URL
+        $filename = basename($path);
+        $url = asset("storage/uploads/{$filename}");
 
         return response()->json([
             'message' => 'File uploaded successfully',
-            'file_path' => $path
+            'path' => $path,
+            'url' => $url,
         ]);
     }
 }

@@ -6,16 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
- public function up()
-{
-    Schema::create('users', function (Blueprint $table) {
-        $table->id();
-        $table->string('username');
-        $table->string('email')->unique();
-        $table->string('password');
-        $table->timestamps();
-    });
-}
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name'); // Add name field (used in tinker and Laravel defaults)
+            $table->string('username')->nullable()->unique(); // good to make it unique
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable(); // Laravel default
+            $table->string('password');
+            $table->rememberToken(); // Required for authentication remember feature
+            $table->timestamps();
+        });
+    }
 
     public function down()
     {
