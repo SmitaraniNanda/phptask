@@ -56,8 +56,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-
-        //  Custom Middleware for login field validation
+        'gmail.only' => \App\Http\Middleware\GmailOnly::class,
         'validate.login' => \App\Http\Middleware\ValidateLoginFields::class,
     ];
 }

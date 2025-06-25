@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\FileUploadController;
 
 /*
@@ -17,12 +16,21 @@ use App\Http\Controllers\FileUploadController;
 |
 */
 
-// Route::post('/login', [AuthController::class, 'login'])->middleware('validate.login');
-// Route::get('/welcome', [AuthController::class, 'welcome']);
-
-
+// Public Routes
+Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Protected Route: Get Authenticated User
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/upload', [FileUploadController::class, 'upload'])->middleware('auth:sanctum');
+
+// Protected Route: Upload file (Gmail users only)
+Route::post('/upload', [FileUploadController::class, 'upload'])->middleware(['auth:sanctum', 'gmail.only']);
+
+// Protected Route: Gmail-only dashboard
+Route::middleware(['auth:sanctum', 'gmail.only'])->get('/dashboard', function () {
+    return response()->json([
+        'message' => 'Welcome to the Gmail-only dashboard!',
+    ]);
+});

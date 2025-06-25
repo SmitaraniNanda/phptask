@@ -11,7 +11,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Add name field (used in tinker and Laravel defaults)
-            $table->string('username')->nullable()->unique(); // good to make it unique
+            $table->string('username')->nullable()->unique(); //  make it unique
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable(); // Laravel default
             $table->string('password');
