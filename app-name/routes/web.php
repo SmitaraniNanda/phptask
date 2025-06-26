@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,4 +21,9 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/sanctum/csrf-cookie', function () {
     return response()->json(['csrf' => csrf_token()]);
+});
+
+Route::get('/download-pdf', [PDFController::class, 'generatePDF'])->name('download.pdf');
+Route::get('/', function () {
+    return view('download');
 });
