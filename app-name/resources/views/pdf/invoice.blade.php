@@ -4,18 +4,8 @@
     <meta charset="utf-8">
     <title>Invoice PDF</title>
     <style>
-        body {
-            font-family: DejaVu Sans, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        p {
-            font-size: 16px;
-        }
+        body { font-family: DejaVu Sans, sans-serif; padding: 20px; }
+        h1 { text-align: center; color: #333; }
     </style>
 </head>
 <body>

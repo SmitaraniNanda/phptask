@@ -2,13 +2,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Events\InvoiceRequested;
 
 class PDFController extends Controller
 {
     public function generatePDF()
     {
-        // Example data to pass to the view
         $data = [
             'customer' => [
                 'name' => 'Smita',
@@ -19,7 +18,9 @@ class PDFController extends Controller
             ]
         ];
 
-        $pdf = Pdf::loadView('pdf.invoice', $data);
-        return $pdf->download('invoice.pdf');
+        // Dispatch the event
+        event(new InvoiceRequested($data));
+
+        return response()->json(['message' => 'Invoice generation event dispatched.']);
     }
 }

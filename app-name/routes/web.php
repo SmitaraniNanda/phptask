@@ -23,7 +23,7 @@ Route::get('/sanctum/csrf-cookie', function () {
     return response()->json(['csrf' => csrf_token()]);
 });
 
-Route::get('/download-pdf', [PDFController::class, 'generatePDF'])->name('download.pdf');
+Route::get('/download-invoice', [PDFController::class, 'generatePDF'])->name('download.pdf');
 Route::get('/', function () {
     return view('download');
-});
+}); 
