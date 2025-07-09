@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,17 +11,16 @@ class PDFController extends Controller
     {
         $data = [
             'customer' => [
-                'name' => 'Smita',
-                'email' => 'smita@gmail.com',
-                'invoice_id' => 'INV-00123',
+                'name' => 'Snigdha',
+                'email' => 'snigdha@gmail.com',
+                'invoice_id' => 'INV-' . rand(1000, 9999),
                 'amount' => '150.00',
                 'date' => now()->format('Y-m-d'),
             ]
         ];
 
-        // Dispatch the event
         event(new InvoiceRequested($data));
 
-        return response()->json(['message' => 'Invoice generation event dispatched.']);
+        return response()->json(['message' => 'Invoice generation triggered.']);
     }
 }

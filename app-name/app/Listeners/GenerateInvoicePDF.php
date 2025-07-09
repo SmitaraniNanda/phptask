@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Listeners;
 
 use App\Events\InvoiceRequested;
@@ -11,7 +12,8 @@ class GenerateInvoicePDF
     {
         $pdf = Pdf::loadView('pdf.invoice', $event->data);
 
-        $filename = 'invoice-' . $event->data['customer']['invoice_id'] . '.pdf';
+        $filename = 'invoice-' . $event->data['customer']['invoice_id']  . '-' . now()->format('Ymd_His')  . '.pdf';
+
         Storage::put('invoices/' . $filename, $pdf->output());
     }
 }

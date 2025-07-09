@@ -6,10 +6,13 @@
     <style>
         body { font-family: DejaVu Sans, sans-serif; padding: 20px; }
         h1 { text-align: center; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
     </style>
 </head>
 <body>
     <h1>Invoice</h1>
+
     <p><strong>Name:</strong> {{ $customer['name'] }}</p>
     <p><strong>Email:</strong> {{ $customer['email'] }}</p>
     <p><strong>Invoice ID:</strong> {{ $customer['invoice_id'] }}</p>
