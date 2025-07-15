@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\SalesforceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::middleware(['auth:sanctum', 'gmail.only'])->get('/dashboard', function ()
         'message' => 'Welcome to the Gmail-only dashboard!',
     ]);
 });
+//Route::get('/salesforce/leads', [SalesforceController::class, 'getLeads']);
+

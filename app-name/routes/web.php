@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
+//use Omniphx\Forrest\Providers\Laravel\Facades\Forrest;
+use App\Http\Controllers\SalesforceController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +30,7 @@ Route::get('/download-invoice', [PDFController::class, 'generatePDF'])->name('do
 Route::get('/', function () {
     return view('download');
 }); 
+Route::get('/salesforce/login', [SalesforceController::class, 'redirectToSalesforce']);
+Route::get('/salesforce/callback', [SalesforceController::class, 'handleCallback']);
+Route::get('/salesforce/users', [SalesforceController::class, 'listUsers']);
+
