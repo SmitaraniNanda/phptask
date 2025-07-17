@@ -33,4 +33,5 @@ Route::get('/', function () {
 Route::get('/salesforce/login', [SalesforceController::class, 'redirectToSalesforce']);
 Route::get('/salesforce/callback', [SalesforceController::class, 'handleCallback']);
 Route::get('/salesforce/users', [SalesforceController::class, 'listUsers']);
+Route::patch('/salesforce/users/{userId}', [SalesforceController::class, 'updateUser']);
 
