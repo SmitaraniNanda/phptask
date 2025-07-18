@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\SalesforceController;
-
+use App\Http\Controllers\SalesforceWebhookController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,5 +35,4 @@ Route::middleware(['auth:sanctum', 'gmail.only'])->get('/dashboard', function ()
         'message' => 'Welcome to the Gmail-only dashboard!',
     ]);
 });
-//Route::get('/salesforce/leads', [SalesforceController::class, 'getLeads']);
-
+Route::post('/salesforce/user-webhook', [SalesforceWebhookController::class, 'userUpdated']);
